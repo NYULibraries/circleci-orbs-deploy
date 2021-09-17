@@ -1,6 +1,6 @@
 # Orb Project Template
 
-[![CircleCI Build Status](https://circleci.com/gh/NYULibraries/circleci-orbs-deploy.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/NYULibraries/circleci-orbs-deploy) [![CircleCI Orb Version](https://badges.circleci.com/orbs/nyulibraries/nyulibraries-deploy-orb.svg)](https://circleci.com/orbs/registry/orb/nyulibraries/nyulibraries-deploy-orb) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/NYULibraries/circleci-orbs-deploy/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
+[![CircleCI Build Status](https://circleci.com/gh/NYULibraries/circleci-orbs-deploy.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/NYULibraries/circleci-orbs-deploy) [![CircleCI Orb Version](https://badges.circleci.com/orbs/nyulibraries/nyulibraries-deploy.svg)](https://circleci.com/orbs/registry/orb/nyulibraries/nyulibraries-deploy) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/NYULibraries/circleci-orbs-deploy/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
 
 
