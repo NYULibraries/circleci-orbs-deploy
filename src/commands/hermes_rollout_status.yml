@@ -10,7 +10,7 @@ parameters:
     description: Point to the hermesclient image
     type: string
 steps:
-  - run: 
+  - run:
       name: "Get rollout status"
       command: |
         docker run -e HERMES_HOST -e HERMES_SECRET <<parameters.client_image>>:<<parameters.client_tag>> rolloutStatus -deployment=${HERMES_DEPLOYMENT}

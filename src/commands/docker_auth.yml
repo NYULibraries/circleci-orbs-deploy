@@ -8,11 +8,11 @@ parameters:
   username:
     description: 'Provide docker username'
     type: string
-  password: 
+  password:
     description: 'Provide docker password'
     type: string
 steps:
   - run:
-      name: Authenticate Docker 
+      name: Authenticate Docker
       command: |
         docker login -u "<<parameters.username>>" --password "<<parameters.password>>" <<parameters.host>>

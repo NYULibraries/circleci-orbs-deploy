@@ -14,7 +14,7 @@ parameters:
     description: 'Kubernetes deployment name'
     type: string
 steps:
-  - run: 
+  - run:
       name: Export Hermes dev env vars
       command: |
         echo 'export HERMES_HOST=<<parameters.host>>' >> $BASH_ENV
