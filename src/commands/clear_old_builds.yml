@@ -19,9 +19,11 @@ steps:
         unzip awscliv2.zip
         sudo ./aws/install
   - run:
+      name: "Setup clear builds env"
+      command: |
+        echo 'export LAMBDA_FN=<<parameters.lambda_fn>>' >> $BASH_ENV
+        echo 'export S3_BUCKET=<<parameters.s3_bucket>>' >> $BASH_ENV
+        echo 'export KEEP_BUILDS_NUM=<<parameters.keep_builds_num>>' >> $BASH_ENV
+  - run:
       name: "Clear old Lambda builds"
       command: <<include(scripts/clear_old_builds.sh)>>
-      environment:
-        S3_BUCKET: <<parameters.s3_bucket>>
-        LAMBDA_FN: <<parameters.lambda_fn>>
-        KEEP_BUILDS_NUM: <<parameters.keep_builds_num>>
