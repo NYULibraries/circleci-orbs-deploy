@@ -1,13 +1,35 @@
 description: >
-  Sample example description.
+  Use the nyulibraries/deploy orb to deploy via Hermes CD server 
+  and clear up old Lambda builds in S3.
 # Provide a use-case based example for using this orb.
 # Everything in the `usage` section will be displayed in the orb registry.
 # Comments are not retained.
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
-  workflows:
-    use-my-orb:
-      jobs:
-        - <orb-name>/<job-name>
+    nyulibraries: nyulibraries/deploy@1.0.0
+  jobs:
+    hermes-deploy:
+      docker:
+        - image: cimg/base:latest
+      steps:
+        - setup_remote_docker
+        - nyulibraries/hermes_setup:
+            host: ${HERMES_HOST}
+            secret: ${HERMES_SECRET}
+            tag: ${CIRCLE_BRANCH//\//_}-${CIRCLE_SHA1}
+            deployment: ${HERMES_DEPLOYMENT}
+        - nyulibraries/docker_auth:
+            username: ${QUAY_USERNAME}
+            password: ${QUAY_PASSWORD}
+        - nyulibraries/hermes_set_image
+        - nyulibraries/hermes_rollout_status
+    clear-old-builds:
+      docker:
+        - image: cimg/base:latest
+      steps:
+        - setup_remote_docker
+        - nyulibraries/clear_old_builds:
+            s3_bucket: mybucket # Name of S3 Bucket
+            lambda_fn: mylambda # Name of lambda function
+            keep_builds_num: 3 # Number of builds to keep
