@@ -4,9 +4,8 @@ description: >
   Manage reusable deployment configs for NYU Division of Libraries Web Services
 
 # This information will be displayed in the orb registry and is not mandatory.
-# display:
-#   home_url: "https://www.website.com/docs"
-#   source_url: "https://www.github.com/EXAMPLE_ORG/EXAMPLE_PROJECT"
+display:
+  source_url: "https://github.com/NYULibraries/circleci-orbs-deploy"
 
 # If your orb requires other orbs, you can import them like this. Otherwise remove the "orbs" stanza.
 # orbs:
