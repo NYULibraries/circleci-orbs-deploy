@@ -1,0 +1,18 @@
+description: >
+  This command authorizes docker against a remote repository, i.e. DockerHub, Quay.io
+parameters:
+  host:
+    default: 'quay.io'
+    description: 'Provide docker host'
+    type: string
+  username:
+    description: 'Provide docker username'
+    type: string
+  password: 
+    description: 'Provide docker password'
+    type: string
+steps:
+  - run:
+      name: Authenticate Docker 
+      command: |
+        docker login -u "<<parameters.username>>" --password "<<parameters.password>>" <<parameters.host>>

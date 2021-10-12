@@ -1,0 +1,16 @@
+description: >
+  This command follows the progress of the image being deployed. Returns success when the new deployment is ready.
+parameters:
+  client_tag:
+    default: 'master'
+    description: Pick a specific hermesclient image tag, defaults to master
+    type: string
+  client_image:
+    default: 'quay.io/nyulibraries/hermesclient'
+    description: Point to the hermesclient image
+    type: string
+steps:
+  - run: 
+      name: "Get rollout status"
+      command: |
+        docker run -e HERMES_HOST -e HERMES_SECRET <<parameters.client_image>>:<<parameters.client_tag>> rolloutStatus -deployment=${HERMES_DEPLOYMENT}

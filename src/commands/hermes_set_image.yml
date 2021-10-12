@@ -1,0 +1,16 @@
+description: >
+  This command sets a new image for the specified deploy in Kubernetes via Hermes CD
+parameters:
+  client_tag:
+    default: 'master'
+    description: Pick a specific hermesclient image tag, defaults to master
+    type: string
+  client_image:
+    default: 'quay.io/nyulibraries/hermesclient'
+    description: Point to the hermesclient image
+    type: string
+steps:
+  - run:
+      name: "Set new image"
+      command: |
+        docker run -e HERMES_HOST -e HERMES_SECRET <<parameters.client_image>>:<<parameters.client_tag>> setImage -deployment=${HERMES_DEPLOYMENT} -tag=${TAG}
