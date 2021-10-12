@@ -1,5 +1,5 @@
 description: >
-  Use the nyulibraries/deploy orb to deploy via Hermes CD server 
+  Use the nyulibraries/deploy orb to deploy via Hermes CD server
   and clear up old Lambda builds in S3.
 # Provide a use-case based example for using this orb.
 # Everything in the `usage` section will be displayed in the orb registry.
