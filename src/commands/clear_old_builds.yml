@@ -1,0 +1,39 @@
+description: >
+  This command clears out old Lambda builds from S3
+parameters:
+  s3_bucket:
+    description: S3 Bucket containing lambda code
+    type: string
+  lambda_fn:
+    description: Name of Lambda function
+    type: string
+  keep_builds_num:
+    default: 3
+    type: integer
+    description: Number of builds to keep
+steps:
+  - run:
+      name: Install AWS-CLI
+      command: |
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install
+  - run:
+      name: "Clear old Lambda builds"
+      command: |
+        # Recursively list all lambda functions in bucket, sort by date, 
+        # pull the latest N files, and extract just the filename into a temp file to maintain newline spacing
+        aws s3 ls s3://<<parameters.s3_bucket>>/<<parameters.lambda_fn>>/ --recursive | sort | tail -n <<parameters.keep_builds_num>> | awk '{print $4}' > exclude.txt
+
+        EXCLUDE_ARGS=""
+        EXCLUDE_FILES="$(cat exclude.txt)"
+
+        # Loop through files we want to keep and format as --exclude <filename> parameters for the AWS-CLI
+        for line in $EXCLUDE_FILES
+        do
+            EXCLUDE_ARGS="$EXCLUDE_ARGS--exclude $(echo $line | awk -F'/' '{printf("%s/%s"), $2, $3}') "
+        done 
+
+        # Recursively remove all lambda functions of given name, in given bucket
+        # except the ones we explicitly exclude
+        aws s3 rm s3://<<parameters.s3_bucket>>/<<parameters.lambda_fn>>/ --recursive $EXCLUDE_ARGS
